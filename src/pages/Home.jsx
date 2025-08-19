@@ -10,7 +10,7 @@ const fade = (delay = 0) => ({
 const blocks = [
   { label: "Projects", desc: "Explore my work", to: "/projects" },
   { label: "Experience", desc: "View my journey", to: "/experience" },
-  { label: "Contact", desc: "Let’s connect", to: "/contact" },
+  { label: "Contact", desc: "Let's connect", to: "/contact" },
   { label: "About", desc: "Know more about me", to: "/about" },
   { label: "Play", desc: "Fun experiments", to: "/game" },
 ];
@@ -22,7 +22,7 @@ const Home = () => {
       <div className="flex flex-col mt-[30px] justify-end h-full text-left max-w-xl pb-8 md:pb-12">
         <motion.h1 {...fade(0)}>
           <span className="block text-lg sm:text-xl font-medium text-neutral-600 dark:text-neutral-400">
-            Hi, I’m
+            Hi, I'm
           </span>
           <span className="block text-4xl sm:text-6xl md:text-7xl font-extrabold text-black dark:text-white mt-2">
             Prateek Sharma
@@ -39,31 +39,10 @@ const Home = () => {
         </motion.p>
       </div>
 
-      {/* Right Floating Blocks */}
-      <div className="relative flex-1 h-full flex flex-col md:block items-center justify-center mt-12 md:mt-[100px] gap-6">
-        {/* Mobile: stacked cards */}
-        <div className="flex flex-col gap-4 w-full md:hidden">
-          {blocks.map((block, i) => (
-            <motion.div
-              key={block.label}
-              {...fade(0.2 + i * 0.1)}
-              className="bg-white dark:bg-neutral-900 text-black dark:text-white 
-                         shadow-xl rounded-2xl px-6 py-5 cursor-pointer 
-                         border border-neutral-200 dark:border-neutral-700 
-                         w-full"
-            >
-              <Link to={block.to} className="block">
-                <h3 className="text-xl font-semibold">{block.label}</h3>
-                <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-2">
-                  {block.desc}
-                </p>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-
+      {/* Right Floating Blocks - Desktop only */}
+      <div className="relative flex-1 h-full hidden md:flex flex-col items-center justify-center mt-12 md:mt-[100px] gap-6">
         {/* Desktop: floating blocks */}
-        <div className="hidden md:block relative w-full h-full mt-[50px]">
+        <div className="relative w-full h-full mt-[50px]">
           {blocks.map((block, i) => (
             <motion.div
               key={block.label}
@@ -88,6 +67,30 @@ const Home = () => {
             </motion.div>
           ))}
         </div>
+      </div>
+
+      {/* Mobile: zig-zag stacked cards */}
+      <div className="flex flex-col gap-6 w-full md:hidden relative">
+        {blocks.map((block, i) => (
+          <motion.div
+            key={block.label}
+            {...fade(0.2 + i * 0.1)}
+            className="bg-white dark:bg-neutral-900 text-black dark:text-white 
+                      shadow-xl rounded-2xl px-6 py-5 cursor-pointer 
+                      border border-neutral-200 dark:border-neutral-700 
+                      w-[85%] sm:w-[80%] mx-auto"
+            style={{
+              marginLeft: i % 2 === 0 ? "0" : "auto", // zig-zag effect
+            }}
+          >
+            <Link to={block.to} className="block">
+              <h3 className="text-xl font-semibold">{block.label}</h3>
+              <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-2">
+                {block.desc}
+              </p>
+            </Link>
+          </motion.div>
+        ))}
       </div>
 
       {/* Background blob */}
