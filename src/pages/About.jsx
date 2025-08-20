@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import SectionHeader from "../components/SectionHeader";
 import avatar from "../images/avatar.png"; // replace with your avatar image path
+import TypingEffect from "../components/TypingEffect";
+import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 export default function About() {
   return (
@@ -28,16 +30,26 @@ export default function About() {
           transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
         >
           <p className="text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
-            Hi, I’m Prateek Sharma — a passionate frontend developer dedicated
-            to building minimal, performant, and elegant web applications. I
-            enjoy transforming ideas into intuitive digital experiences by
-            combining modern frameworks with clean, responsive design. My
-            primary focus lies in React, Tailwind CSS, and component-driven UI
-            systems, but I also explore new tools that improve performance and
-            user engagement. Beyond coding, I’m inspired by thoughtful design
-            principles and seamless user journeys. I thrive in solving problems,
-            learning continuously, and crafting projects that balance creativity
-            with functionality.
+          Hi, I’m Prateek Sharma — a passionate frontend developer dedicated to building minimal, performant, and elegant web applications. I
+              enjoy transforming ideas into intuitive digital experiences by
+              combining modern frameworks with clean, responsive design. My
+              primary focus lies in React, Tailwind CSS, and component-driven UI
+              systems, but I also explore new tools that improve performance and
+              user engagement. Beyond coding, I’m inspired by thoughtful design
+              principles and seamless user journeys. I thrive in solving problems,
+              learning continuously, and crafting projects that balance creativity
+              with functionality.
+            {/* <TypingEffect 
+              text={`Hi, I’m Prateek Sharma — a passionate frontend developer dedicated to building minimal, performant, and elegant web applications. I
+              enjoy transforming ideas into intuitive digital experiences by
+              combining modern frameworks with clean, responsive design. My
+              primary focus lies in React, Tailwind CSS, and component-driven UI
+              systems, but I also explore new tools that improve performance and
+              user engagement. Beyond coding, I’m inspired by thoughtful design
+              principles and seamless user journeys. I thrive in solving problems,
+              learning continuously, and crafting projects that balance creativity
+              with functionality.`}
+            /> */}
           </p>
 
           {/* Social Media Icons */}
@@ -54,9 +66,7 @@ export default function About() {
               rel="noreferrer"
               className="text-black dark:text-white hover:text-gray-500 dark:hover:text-gray-400 transition-colors"
             >
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 .297c-6.63 0-12 5.373-12 12 ..."></path>
-              </svg>
+              <FaGithub className="w-6 h-6" />
             </a>
 
             {/* LinkedIn */}
@@ -66,9 +76,7 @@ export default function About() {
               rel="noreferrer"
               className="text-black dark:text-white hover:text-gray-500 dark:hover:text-gray-400 transition-colors"
             >
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M4.98 3.5c0 1.38-1.12..."></path>
-              </svg>
+              <FaLinkedin className="w-6 h-6" />
             </a>
 
             {/* Instagram */}
@@ -78,9 +86,7 @@ export default function About() {
               rel="noreferrer"
               className="text-black dark:text-white hover:text-gray-500 dark:hover:text-gray-400 transition-colors"
             >
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M7 2C4.24 2 2 4.24..."></path>
-              </svg>
+              <FaInstagram className="w-6 h-6" />
             </a>
           </motion.div>
         </motion.div>

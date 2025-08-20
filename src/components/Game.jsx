@@ -1,5 +1,14 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { X, Play, Pause, RotateCcw, Gamepad2 } from "lucide-react";
+import brickIcon from "../images/brick.png"
+import snakeIcon from "../images/snake.png"
+import pingpongIcon from "../images/pingpong.png"
+import tetrisIcon from "../images/tetris.png"
+import bricklightIcon from "../images/bricklight.png"
+import snakelightIcon from "../images/snakelight.png"
+import pingponglightIcon from "../images/pingponglight.png"
+import tetrislightIcon from "../images/tetrislight.png"
+
 
 // Individual Game Components
 const BrickBreaker = ({ isDarkMode = false, playing = false, onGameEnd }) => {
@@ -1035,12 +1044,12 @@ const Pong = ({ isDarkMode = false, playing = false, onGameEnd }) => {
 };
 
 // Game Selection Component
-const GameSelector = ({ onSelectGame }) => {
+const GameSelector = ({ onSelectGame, isDarkMode }) => {
   const games = [
-    { id: 'brick-breaker', name: 'Brick Breaker', icon: '🧱' },
-    { id: 'snake', name: 'Snake', icon: '🐍' },
-    { id: 'tetris', name: 'Tetris', icon: '🔷' },
-    { id: 'pong', name: 'Pong', icon: '🏓' }
+    { id: 'brick-breaker', name: 'Brick Breaker', iconDark: brickIcon, iconLight: bricklightIcon },
+    { id: 'snake', name: 'Snake', iconDark: snakeIcon, iconLight: snakelightIcon },
+    { id: 'tetris', name: 'Tetris', iconDark: tetrisIcon, iconLight: tetrislightIcon },
+    { id: 'pong', name: 'Pong', iconDark: pingpongIcon, iconLight: pingponglightIcon }
   ];
 
   const isMobile = window.innerWidth < 768;
@@ -1053,7 +1062,12 @@ const GameSelector = ({ onSelectGame }) => {
           onClick={() => onSelectGame(game.id)}
           className="bg-white dark:bg-black border-2 border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black text-black dark:text-white rounded-2xl p-6 aspect-square flex flex-col items-center justify-center transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
         >
-          <div className={`${isMobile ? 'text-4xl mb-2' : 'text-6xl mb-4'}`}>{game.icon}</div>
+          <img
+            src={isDarkMode ? game.iconLight : game.iconDark}
+            alt={`${game.name} icon`}
+            className={isMobile ? 'w-12 h-12 mb-2' : 'w-20 h-20 mb-4'}
+            style={{ objectFit: 'contain' }}
+          />         
           <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold`}>{game.name}</h3>
         </button>
       ))}
@@ -1161,7 +1175,7 @@ const GameModal = ({ isOpen, onClose, gameId, isDarkMode }) => {
           {gameResult && (
             <div className="mb-4 text-center">
               <div className={`${isMobile ? 'text-2xl' : 'text-3xl'} font-bold mb-2 ${gameResult.result === 'win' ? 'text-green-500' : 'text-red-500'}`}>
-                {gameResult.result === 'win' ? '🎉 You Win!' : '💀 Game Over!'}
+                {gameResult.result === 'win' ? 'You Win!' : 'Game Over!'}
               </div>
               <div className="text-lg text-gray-600 dark:text-gray-400">
                 Final Score: {gameResult.score}
@@ -1216,7 +1230,7 @@ const GameCenter = () => {
       <div className="bg-white dark:bg-black border-2 border-black dark:border-white rounded-3xl shadow-2xl w-full" style={{ maxWidth: isMobile ? '100%' : '600px' }}>
         <div className="text-center p-6 border-b-2 border-black dark:border-white">
           <h1 className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-black dark:text-white mb-2`}>
-            🎮 Game Center
+            Game Center
           </h1>
           <p className="text-gray-600 dark:text-gray-400 text-sm">
             Choose your favorite retro game and start playing!

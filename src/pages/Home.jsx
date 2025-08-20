@@ -1,5 +1,15 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import contactIcon from "../images/contact.png"
+import experienceIcon from "../images/experience.png"
+import projectIcon from "../images/project.png"
+import playIcon from "../images/play.png"
+import aboutIcon from "../images/about.png"
+import TypingEffect from "../components/TypingEffect";
+import { useState } from "react";
+import { useEffect } from "react";
+
+
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 16 },
@@ -7,97 +17,142 @@ const fade = (delay = 0) => ({
   transition: { duration: 0.6, delay },
 });
 
+
 const blocks = [
-  { label: "Projects", desc: "Explore my work", to: "/projects" },
-  { label: "Experience", desc: "View my journey", to: "/experience" },
-  { label: "Contact", desc: "Let's connect", to: "/contact" },
-  { label: "About", desc: "Know more about me", to: "/about" },
-  { label: "Play", desc: "Fun experiments", to: "/game" },
+  { 
+    label: "Experience", 
+    desc: "View my journey", 
+    to: "/experience",
+    icon: "💼", // Fallback icon
+    image: experienceIcon,
+    hasImage: true
+  },
+  { 
+    label: "Projects", 
+    desc: "Explore my work", 
+    to: "/projects",
+    icon: "📁", // Fallback icon
+    image: projectIcon,
+    hasImage: true
+  },
+  { 
+    label: "Contact", 
+    desc: "Let's connect", 
+    to: "/contact",
+    icon: "📞", // Fallback icon
+    image: contactIcon,
+    hasImage: true
+  },
+  { 
+    label: "About", 
+    desc: "Know more about me", 
+    to: "/about",
+    icon: "👤", // Fallback icon
+    image: aboutIcon, 
+    hasImage: true
+  },
+  { 
+    label: "Play", 
+    desc: "Fun experiments", 
+    to: "/game",
+    icon: "🎮", // Fallback icon
+    image: playIcon,
+    hasImage: true
+  },
 ];
 
+
 const Home = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Detect mobile on mount and window resize
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Positions for desktop and mobile
+  const desktopPositions = [
+    { top: "10%", left: "25%" },
+    { top: "10%", right: "25%" },
+    { bottom: "15%", left: "22%" },
+    { bottom: "15%", right: "22%" },
+    { top: "80%", left: "45%", transform: "translate(-30%, 30%)" },
+  ];
+
+  const mobilePositions = [
+    { top: "5%", left: "10%" },
+    { top: "5%", right: "10%" },
+    { bottom: "10%", left: "10%" },
+    { bottom: "10%", right: "10%" },
+    { top: "70%", left: "50%", transform: "translate(-50%, 30%)" },
+  ];
+
+  const positions = isMobile ? mobilePositions : desktopPositions;
+  const blockSize = isMobile ? 140 : 180;
+
   return (
-    <section className="relative h-auto md:h-[55vh] flex flex-col md:flex-row items-center justify-between px-6 sm:px-12">
-      {/* Left Content */}
-      <div className="flex flex-col mt-[30px] justify-end h-full text-left max-w-xl pb-8 md:pb-12">
-        <motion.h1 {...fade(0)}>
-          <span className="block text-lg sm:text-xl font-medium text-neutral-600 dark:text-neutral-400">
-            Hi, I'm
-          </span>
-          <span className="block text-4xl sm:text-6xl md:text-7xl font-extrabold text-black dark:text-white mt-2">
-            Prateek Sharma
-          </span>
-        </motion.h1>
+    <section className="relative min-h-[600px] flex items-center justify-center px-4 sm:px-12 py-10 sm:py-16">
+      {/* Center container for details */}
+      <motion.div
+        {...fade(1)}
+        className="z-10 max-w-xl text-center px-2 sm:px-0"
+        style={{ maxWidth: isMobile ? "90vw" : undefined }}
+      >
+        <span className="block text-xl font-medium text-neutral-600 dark:text-neutral-400">
+          Hi, I'm
+        </span>
+        <h1 className="block text-4xl sm:text-6xl font-extrabold text-black dark:text-white mt-2 leading-tight">
+          Prateek Sharma
+        </h1>
+        <p className="mt-6 text-base sm:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
+          <TypingEffect
+            text={`Frontend Developer & Prompt Engineer crafting clean, fast, and conversion-focused web apps with React, Tailwind, and thoughtful AI-driven UX.`}
+          />
+        </p>
+      </motion.div>
 
-        <motion.p
-          {...fade(0.15)}
-          className="mt-4 text-base sm:text-lg text-neutral-600 dark:text-neutral-300"
-        >
-          Frontend Developer & Prompt Engineer crafting clean, fast, and
-          conversion-focused web apps with React, Tailwind, and thoughtful
-          AI-driven UX.
-        </motion.p>
-      </div>
-
-      {/* Right Floating Blocks - Desktop only */}
-      <div className="relative flex-1 h-full hidden md:flex flex-col items-center justify-center mt-12 md:mt-[100px] gap-6">
-        {/* Desktop: floating blocks */}
-        <div className="relative w-full h-full mt-[50px]">
-          {blocks.map((block, i) => (
-            <motion.div
-              key={block.label}
-              initial={{ opacity: 0, scale: 0.85, x: i % 2 === 0 ? 80 : -80 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 + i * 0.1 }}
-              className="absolute bg-white dark:bg-neutral-900 text-black dark:text-white 
-                         shadow-xl rounded-2xl px-6 py-5 cursor-pointer hover:scale-105 
-                         transition-all border border-neutral-200 dark:border-neutral-700 
-                         w-56 sm:w-64"
-              style={{
-                top: `${i * 20}%`,
-                right: `${(i % 2) * 22 + 8}%`,
-              }}
-            >
-              <Link to={block.to} className="block">
-                <h3 className="text-xl font-semibold">{block.label}</h3>
-                <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-2">
-                  {block.desc}
-                </p>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Mobile: zig-zag stacked cards */}
-      <div className="flex flex-col gap-6 w-full md:hidden relative">
+      {/* Floating blocks container */}
+      <div className="absolute inset-0 pointer-events-none">
         {blocks.map((block, i) => (
           <motion.div
             key={block.label}
-            {...fade(0.2 + i * 0.1)}
-            className="bg-white dark:bg-neutral-900 text-black dark:text-white 
-                      shadow-xl rounded-2xl px-6 py-5 cursor-pointer 
-                      border border-neutral-200 dark:border-neutral-700 
-                      w-[85%] sm:w-[80%] mx-auto"
+            initial={{ opacity: 0.4, scale: 0.85, y: 0 }}
+            animate={{ opacity: 1, scale: 1, y: [0, -15, 0] }}
+            transition={{
+              duration: 5,
+              delay: 0.3 + i * 0.2,
+              repeat: Infinity,
+              repeatType: "mirror",
+              ease: "easeInOut",
+            }}
+            className="bg-white dark:bg-neutral-900 text-black dark:text-white shadow-lg rounded-xl border border-neutral-200 dark:border-neutral-700 cursor-pointer absolute overflow-hidden"
             style={{
-              marginLeft: i % 2 === 0 ? "0" : "auto", // zig-zag effect
+              width: blockSize,
+              height: blockSize,
+              ...positions[i],
             }}
           >
-            <Link to={block.to} className="block">
-              <h3 className="text-xl font-semibold">{block.label}</h3>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-2">
-                {block.desc}
-              </p>
+            <Link to={block.to} className="block h-full w-full pointer-events-auto">
+              <img
+                src={block.image}
+                alt={block.label}
+                className="w-full h-full object-cover rounded-xl"
+                style={{ borderRadius: "0.75rem" }}
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors">
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent text-center">
+                  <h3 className="text-lg font-semibold mb-1 text-white">{block.label}</h3>
+                  <p className="text-xs text-gray-200">{block.desc}</p>
+                </div>
+              </div>
             </Link>
           </motion.div>
         ))}
-      </div>
-
-      {/* Background blob */}
-      <div className="pointer-events-none absolute -z-10 inset-0 overflow-hidden">
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 w-[60rem] h-[60rem] 
-                        rounded-full blur-3xl opacity-20 dark:opacity-30 
-                        bg-gradient-to-tr from-sky-500 via-indigo-500 to-purple-500" />
       </div>
     </section>
   );
