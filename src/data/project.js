@@ -1,6 +1,6 @@
 export const projects = [
   {
-    title: 'TenderGrid — Tenders Dashboard',
+    title: 'TenderGrid',
     summary: 'Next + Material UI, Tenders listed from all over the world, real-time filters and many more...',
     stack: ['Next', 'Material UI', 'Tanstack query', 'react-virtualizer', 'Redux'],
     year: '2025',
@@ -24,7 +24,7 @@ export const projects = [
     image: '/src/images/aigrid.png',
   },
   {
-    title: 'MOViGO — Movie App',
+    title: 'MoviGo',
     summary: 'React + TMDB API with wishlist, auth, and clean card layout.',
     stack: ['React', 'Redux', 'TMDB', 'Express'],
     year: '2025',

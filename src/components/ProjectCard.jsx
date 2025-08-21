@@ -7,11 +7,15 @@ export default function ProjectCard({ project }) {
       href={project.href}
       target="_blank"
       rel="noreferrer"
-      className="card p-5 block hover:shadow-lg rounded-xl overflow-hidden bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800"
+      className="card p-5 block hover:shadow-lg rounded-xl overflow-hidden bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex-shrink-0"
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
+      style={{
+        width: '420px',   // fixed width to match layout
+        height: '420px',  // fixed height to match layout
+      }}
     >
       {/* 🖼️ Project Image */}
       {project.image && (

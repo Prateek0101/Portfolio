@@ -10,7 +10,7 @@ const NavItem = ({ to, children, onClick }) => (
     className={({ isActive }) =>
       `pill text-sm font-medium ${
         isActive
-          ? "bg-white text-black dark:bg-white dark:text-black"
+          ? "bg-white text-black dark:bg-[#f0f656] dark:text-black"
           : "text-white/90 hover:text-white"
       }`
     }
